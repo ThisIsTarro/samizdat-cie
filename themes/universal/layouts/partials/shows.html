@@ -33,7 +33,7 @@
                     </a>
                     <div class="show-card__actions">
                         <a class="btn btn-template-transparent-primary show-card__cta show-card__cta--secondary" href="{{ .RelPermalink }}">{{ "En savoir plus" | markdownify }}</a>
-                        <a class="btn btn-template-main show-card__cta" href="{{ $ticketURL }}">{{ $ticketText | markdownify }}</a>
+                        <a class="btn btn-template-main show-card__cta" href="{{ $ticketURL | safeURL }}">{{ $ticketText | markdownify }}</a>
                     </div>
                 </div>
                 <div class="show-card__content">

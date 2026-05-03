@@ -143,19 +143,19 @@
 
               <div class="show-single__aside-actions">
                 {{ if and $ticketURL $ticketText }}
-                <a class="btn btn-template-main" href="{{ $ticketURL }}">
+                <a class="btn btn-template-main" href="{{ $ticketURL | safeURL }}">
                   {{ $ticketText | markdownify }}
                 </a>
                 {{ else if and $scriptURL $scriptButton }}
-                <a class="btn btn-template-main" href="{{ $scriptURL }}">
+                <a class="btn btn-template-main" href="{{ $scriptURL | safeURL }}">
                   {{ $scriptButton | markdownify }}
                 </a>
                 {{ end }}
                 {{ if and $learningBrochureURL $learningBrochureText }}
-                <a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL }}">{{ $learningBrochureText | markdownify }}</a>
+                <a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL | safeURL }}">{{ $learningBrochureText | markdownify }}</a>
                 {{ end }}
                 {{ if and $artisticBrochureURL $artisticBrochureText }}
-                <a class="btn btn-template-transparent-primary" href="{{ $artisticBrochureURL }}">{{ $artisticBrochureText | markdownify }}</a>
+                <a class="btn btn-template-transparent-primary" href="{{ $artisticBrochureURL | safeURL }}">{{ $artisticBrochureText | markdownify }}</a>
                 {{ end }}
               </div>
             </aside>
@@ -186,7 +186,7 @@
               {{ with .venue }}<p class="show-ticketing__venue">{{ . | markdownify }}</p>{{ end }}
               {{ with .dates }}<p class="show-ticketing__dates">{{ . | markdownify }}</p>{{ end }}
               {{ if and .url $ticketText }}
-              <a class="btn btn-template-main" href="{{ . }}">
+              <a class="btn btn-template-main" href="{{ .url | safeURL }}">
                 {{ $ticketText | markdownify }}
               </a>
               {{ end }}
@@ -214,8 +214,8 @@
           <h2>À l'attention des scolaires</h2>
           <p>Vous planifiez une sortie scolaire ? Trouvez les dates et les informations sur les billets pour une représentation près de votre école.</p>
           <div class="show-school__links">
-            {{ with $schoolScheduleURL }}<a class="btn btn-template-main" href="{{ . }}">Calendrier des spectacles scolaires</a>{{ end }}
-            {{ if and $learningBrochureURL $learningBrochureText }}<a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL }}">{{ $learningBrochureText | markdownify }}</a>{{ end }}
+            {{ with $schoolScheduleURL }}<a class="btn btn-template-main" href="{{ . | safeURL }}">Calendrier des spectacles scolaires</a>{{ end }}
+            {{ if and $learningBrochureURL $learningBrochureText }}<a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL | safeURL }}">{{ $learningBrochureText | markdownify }}</a>{{ end }}
           </div>
         </div>
       </section>
@@ -251,7 +251,7 @@
       <section class="show-script">
         <div class="container">
           <h2>Vous souhaitez programmer ce spectacle ?</h2>
-          <a class="btn btn-template-main" href="{{ . }}">{{ $scriptButton | markdownify }}</a>
+          <a class="btn btn-template-main" href="{{ . | safeURL }}">{{ $scriptButton | markdownify }}</a>
         </div>
       </section>
       {{ end }}
@@ -262,7 +262,7 @@
           <h2>Remerciements</h2>
           <div class="show-acknowledgements__logos">
             {{ range . }}
-            <a href="{{ .url }}">
+            <a href="{{ .url | safeURL }}">
               <img src="{{ .image | relURL }}" alt="{{ default "Logo partenaire" .alt }}">
             </a>
             {{ end }}
