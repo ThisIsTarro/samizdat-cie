@@ -1,0 +1,38 @@
+{{ $heroPage := or (site.GetPage "/hero") (site.GetPage "page" "hero.md") }}
+{{ $video := "img/website-roll.webm" }}
+{{ $heroTitle := "Samizdat" }}
+{{ $titleAccent := "fabrique des scenes qui restent." }}
+{{ $lead := "" }}
+{{ $actionText := "Decouvrir notre travail" }}
+{{ $actionURL := "/apropos" }}
+
+{{ with $heroPage }}
+    {{ with .Params.video }}{{ $video = . }}{{ end }}
+    {{ with .Params.hero_title }}{{ $heroTitle = . }}{{ end }}
+    {{ with .Params.title_accent }}{{ $titleAccent = . }}{{ end }}
+    {{ with .Params.lead }}{{ $lead = . }}{{ end }}
+    {{ with .Params.action_text }}{{ $actionText = . }}{{ end }}
+    {{ with .Params.action_url }}{{ $actionURL = . }}{{ end }}
+{{ end }}
+
+{{ $actionHref := $actionURL }}
+{{ if not (or (hasPrefix $actionURL "http://") (hasPrefix $actionURL "https://") (hasPrefix $actionURL "mailto:") (hasPrefix $actionURL "tel:")) }}
+    {{ $actionHref = relLangURL $actionURL }}
+{{ end }}
+
+<section>
+    <div class="home-hero">
+        <video class="home-hero__video" src="{{ $video | relURL }}" autoplay muted loop playsinline></video>
+        <div class="hero-overlay"></div>
+        <div class="home-hero__content">
+            <h1 class="home-hero__title">
+                <span>{{ $heroTitle | markdownify }}</span>
+                <span class="home-hero__title-accent">{{ $titleAccent | markdownify }}</span>
+            </h1>
+            {{ with $lead }}<p class="home-hero__lead">{{ . | markdownify }}</p>{{ end }}
+            <p class="home-hero__actions">
+                <a href="{{ $actionHref }}" class="btn btn-template-main">{{ $actionText | markdownify }}</a>
+            </p>
+        </div>
+    </div>
+</section>

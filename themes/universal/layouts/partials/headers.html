@@ -1,0 +1,160 @@
+<meta charset="utf-8">
+<meta name="robots" content="all,follow">
+<meta name="googlebot" content="index,follow,snippet,archive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ $title_plain := .Title | markdownify | plainify }}
+{{ $site_title := .Site.Title | markdownify | plainify }}
+{{ $title_full := cond (eq $title_plain $site_title) $title_plain (printf "%s | %s" $title_plain $site_title) }}
+<title>{{ $title_full }}</title>
+<meta name="author" content="{{ .Param "author" }}" />
+
+<!-- Canonical URL for SEO -->
+<link rel="canonical" href="{{ .Permalink | absURL }}" />
+
+{{ $keywords := .Site.Params.defaultKeywords | default (slice "" | first 0) }}
+{{ if isset .Params "tags" }}{{ range .Params.tags }}{{ $keywords = $keywords | append . }}{{ end }}{{ end }}
+{{ if isset .Params "keywords" }}{{ range .Params.keywords }}{{ $keywords = $keywords | append . }}{{ end }}{{ end }}
+{{ if gt (len $keywords) 0 }}
+<meta name="keywords" content="{{ delimit (uniq $keywords) ", " }}">
+{{ end }}
+{{ $description_source := .Description | default (.Param "summary") | default .Site.Params.defaultDescription }}
+{{ $description_plain := $description_source | markdownify | plainify }}
+<meta name="description" content="{{ $description_plain }}">
+
+{{ hugo.Generator }}
+
+<!-- Font -->
+ 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- CSS animations  -->
+<link href="{{ "css/animate.css" | relURL }}" rel="stylesheet">
+
+<!-- Theme stylesheet, if possible do not edit this stylesheet -->
+{{ with .Site.Params.style }}
+  <link href="{{ "css/style" | relURL }}.{{ . }}.css" rel="stylesheet" id="theme-stylesheet">
+{{ else }}
+  <link href="{{ "css/style.default.css" | relURL }}" rel="stylesheet" id="theme-stylesheet">
+{{ end }}
+
+<!-- Custom stylesheet - for your changes -->
+<link href="{{ "css/custom.css" | relURL }}?{{ now.Unix }}" rel="stylesheet">
+
+<!-- Responsivity for older IE -->
+{{ `
+  <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+` | safeHTML }}
+
+<!-- Favicon and Apple touch icons-->
+<link rel="shortcut icon" href="{{ "img/logo-small.png" | relURL }}" type="image/png" />
+<link rel="apple-touch-icon" href="{{ "img/logo-small.png" | relURL }}" />
+
+<!-- owl carousel CSS -->
+<link href="{{ "css/owl.carousel.css" | relURL }}" rel="stylesheet">
+<link href="{{ "css/owl.theme.css" | relURL }}" rel="stylesheet">
+
+<!-- RSS feed intentionally disabled -->
+
+<!-- Facebook OpenGraph tags -->
+{{ $is_blog := and (eq .Type "blog") (eq .Kind "page") }}
+{{ $has_image :=  isset .Params "banner" }}
+{{ $image := cond $has_image .Params.banner (.Site.Params.default_sharing_image | default "img/sharing-default.png") }}
+{{ $is_valid_image := print "static/" $image | fileExists }}
+{{ if $is_valid_image }}
+{{ $image_ext := path.Ext $image }}
+<meta property="og:locale" content="{{ replace .Site.LanguageCode "-" "_" }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ $title_full }}">
+<meta property="og:type" content="{{ cond $is_blog "article" "website" }}">
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:description" content="{{ $description_plain }}">
+<meta property="og:image" content="{{ $image | absURL }}">
+<meta property="og:image:type" content="image/{{ if eq $image_ext ".svg" }}svg+xml{{ else }}{{ trim $image_ext "." }}{{ end }}">
+{{ with .Params.banner_alt }}<meta property="og:image:alt" content="{{ . | markdownify | plainify }}">{{ end }}
+{{ $image_local :=  printf "/static/%s" $image}}
+{{ with (imageConfig $image_local) }}
+  <meta property="og:image:width" content="{{ .Width }}">
+  <meta property="og:image:height" content="{{ .Height }}">
+{{ end }}
+{{ end }}
+{{ with .Lastmod }}<meta property="og:updated_time" content="{{ .Format "2006-01-02T15:04:05Z0700" }}">{{ end }}
+{{ if $is_blog }}
+  {{ with .Param "facebook_site" }}<meta property="article:publisher" content="https://www.facebook.com/{{ . }}/">{{ end }}
+  {{ with .Param "facebook_author" }}<meta property="article:author" content="https://www.facebook.com/{{ . }}/">{{ end }}
+  {{ with .Params.categories }}<meta property="article:section" content="{{ index . 0 }}">{{ end }}
+  {{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">
+  {{ end }}
+  {{ if gt .ExpiryDate .PublishDate }}<meta property="article:expiration_time" content="{{ .ExpiryDate.Format "2006-01-02T15:04:05Z0700" }}">{{ end }}
+  {{ with .PublishDate }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z0700" }}">{{ end }}
+  {{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z0700" }}">{{ end }}
+{{ end }}
+
+<!-- Twitter Card meta tags -->
+<meta name="twitter:card" content="summary{{ if (and $is_blog (and $has_image $is_valid_image)) }}_large_image{{ end }}">
+{{ with .Param "twitter_site" }}<meta name="twitter:site" content="@{{ . }}">{{ end }}
+<meta name="twitter:title" content="{{ $title_full | truncate 70 }}">
+{{ if $is_valid_image }}
+<meta name="twitter:image" content="{{ $image | absURL }}">
+{{ end }}
+<meta name="twitter:description" content="{{ $description_plain | truncate 200 }}">
+{{ with .Param "twitter_author" }}<meta name="twitter:creator" content="@{{ . }}">{{ end }}
+
+<!-- JSON-LD structured data -->
+{{ $logoURL := (printf "%s%s" (.Site.BaseURL | strings.TrimRight "/") ("/" | relURL)) }}
+{{ $logoPath := default "img/logo-small.png" .Site.Params.logo_small }}
+{{ $logoAbs := $logoPath | absURL }}
+{{ $socialLinks := slice }}
+{{ with .Site.Params.social.instagram }}{{ $socialLinks = $socialLinks | append . }}{{ end }}
+{{ with .Site.Params.social.facebook }}{{ $socialLinks = $socialLinks | append . }}{{ end }}
+{{ with .Site.Params.social.youtube }}{{ $socialLinks = $socialLinks | append . }}{{ end }}
+{{ with .Site.Params.social.linkedin }}{{ $socialLinks = $socialLinks | append . }}{{ end }}
+{{ with .Site.Params.social.tiktok }}{{ $socialLinks = $socialLinks | append . }}{{ end }}
+{{ $org := dict
+  "@context" "https://schema.org"
+  "@type" "Organization"
+  "name" .Site.Title
+  "url" (.Site.BaseURL | absURL)
+  "logo" $logoAbs
+}}
+{{ if gt (len $socialLinks) 0 }}{{ $org = merge $org (dict "sameAs" $socialLinks) }}{{ end }}
+<script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+
+{{ $website := dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "name" .Site.Title
+  "url" (.Site.BaseURL | absURL)
+}}
+<script type="application/ld+json">{{ $website | jsonify | safeJS }}</script>
+
+{{ if and (eq .Type "shows") (eq .Kind "page") }}
+  {{ $showImage := default .Params.hero_image .Params.image }}
+  {{ $event := dict
+    "@context" "https://schema.org"
+    "@type" "TheaterEvent"
+    "name" $title_plain
+    "description" $description_plain
+    "url" (.Permalink | absURL)
+    "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+    "eventStatus" "https://schema.org/EventScheduled"
+    "organizer" (dict "@type" "Organization" "name" .Site.Title "url" (.Site.BaseURL | absURL))
+  }}
+  {{ with $showImage }}{{ $event = merge $event (dict "image" ((. | absURL))) }}{{ end }}
+  {{ with .Params.audience }}{{ $event = merge $event (dict "audience" (dict "@type" "Audience" "audienceType" (. | markdownify | plainify))) }}{{ end }}
+  {{ with .Params.public_tickets }}
+    {{ with index . 0 }}
+      {{ $venueName := .venue | default "Lieu à confirmer" }}
+      {{ $cityName := .city | default "France" }}
+      {{ $event = merge $event (dict "location" (dict "@type" "Place" "name" $venueName "address" (dict "@type" "PostalAddress" "addressLocality" $cityName "addressCountry" "FR"))) }}
+      {{ with .url }}{{ $event = merge $event (dict "offers" (dict "@type" "Offer" "url" . "availability" "https://schema.org/InStock")) }}{{ end }}
+    {{ end }}
+  {{ end }}
+  <script type="application/ld+json">{{ $event | jsonify | safeJS }}</script>
+{{ end }}

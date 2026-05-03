@@ -1,0 +1,100 @@
+baseURL = "https://samizdat-cie.fr/"
+locale = "fr-FR"
+title = "Compagnie Samizdat"
+theme = "universal"
+defaultContentLanguage = "fr"
+disableKinds = ["taxonomy", "term", "RSS"]
+cleanDestinationDir = true
+
+[params]
+    defaultDescription = "Compagnie Samizdat : créations théâtrales contemporaines et classiques, spectacles tout public et jeune public."
+    disabled_logo = false
+    logo_text = "Samizdat"
+    logo = "img/samizdat_logo.png"
+    logo_white = "img/samizdat_logo_white_v2.png"
+    logo_small = "img/logo-small.png"
+    email = "your@email.com"
+    contact_form_ajax = true
+    enableRecaptchaInContactForm = true
+    dropdown_mouse_over = true
+    shows_section_bg_color = "#903dd9ff"
+    shows_section_text_color = "#ffffff"
+
+[params.social]
+    instagram = "https://www.instagram.com/lacompagniedesbrunes/"
+    facebook = "https://www.instagram.com/lacompagniedesbrunes/"
+    youtube = "https://www.instagram.com/lacompagniedesbrunes/"
+    linkedin = "https://www.instagram.com/lacompagniedesbrunes/"
+    tiktok = "https://www.instagram.com/lacompagniedesbrunes/"
+
+[params.home_sections]
+    hero = true
+    about_mini = true
+    shows = true
+    features = true
+    testimonials = false
+    see_more = true
+    recent_posts = true
+    clients = false
+
+[params.clients]
+    enable = true
+    title = "Nos partenaires"
+
+[params.testimonials]
+    enable = true
+    title = "Ils parlent de nous"
+
+[menu]
+[[menu.main]]
+    name = "Notre compagnie"
+    identifier = "menu.apropos"
+    url = "/apropos"
+    weight = 2
+    [menu.main.params]
+        footer_group = "A propos"
+
+[[menu.main]]
+    name = "Nos spectacles"
+    identifier = "menu.spectacles"
+    weight = 1
+
+[[menu.main]]
+    name = "Le Legs"
+    url = "/shows/le-legs"
+    weight = 1
+    parent = "menu.spectacles"
+    [menu.main.params]
+        footer_group = "Nos spectacles"
+
+[[menu.main]]
+    name = "La Jeune Fille à la Perle"
+    url = "/shows/la-jeune-fille-a-la-perle"
+    weight = 2
+    parent = "menu.spectacles"
+    [menu.main.params]
+        footer_group = "Nos spectacles"
+
+[[menu.main]]
+    name = "R.U.R"
+    url = "/shows/r-u-r"
+    weight = 3
+    parent = "menu.spectacles"
+    [menu.main.params]
+        footer_group = "Nos spectacles"
+
+[[menu.main]]
+    name = "Nous soutenir ❤️"
+    identifier = "menu.noussoutenir"
+    url = "/noussoutenir"
+    weight = 3
+    [menu.main.params]
+        footer_group = "Mécénat"
+
+[[menu.main]]
+    name = "Contactez nous"
+    identifier = "menu.contact"
+    url = "/contact"
+    weight = 4
+    [menu.main.params]
+        footer_group = "Contact"

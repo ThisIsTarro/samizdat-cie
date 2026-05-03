@@ -1,0 +1,38 @@
+{{ $sectionTitle := default "Notre équipe" .Params.company_members_title }}
+{{ $sectionText := .Params.company_members_text }}
+
+<section class="company-people"{{ with .Params.company_members_bg_color }} style="--company-people-bg: {{ . }};"{{ end }}>
+  <div class="container">
+    <div class="shows-section__heading">
+      <h1>{{ $sectionTitle | markdownify }}</h1>
+      {{ with $sectionText }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+    </div>
+
+    <div class="company-people__list">
+      {{ range .Params.company_members }}
+        {{ $fullName := trim (printf "%s %s" (default "" .prenom) (default "" .nom)) " " }}
+        <article class="company-person">
+          <div class="company-person__media">
+            {{ with .photo }}
+              <img class="company-person__photo" src="{{ . | relURL }}" alt="{{ $fullName }}">
+            {{ end }}
+          </div>
+          <div class="company-person__content">
+            <div class="company-person__name-row">
+              <h3 class="company-person__name">
+                {{ if $fullName }}{{ $fullName }}{{ else }}Membre de l'équipe{{ end }}
+              </h3>
+              {{ with .instagram }}
+                <a class="company-person__instagram company-person__instagram--icon-only" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram de {{ $fullName }}">
+                  <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+              {{ end }}
+            </div>
+            {{ with .role }}<p class="company-person__role">{{ . | markdownify }}</p>{{ end }}
+            {{ with .texte }}<p class="company-person__text">{{ . | markdownify }}</p>{{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+  <head>
+    {{ partial "headers.html" . }}
+    {{ partial "custom_headers.html" . }}
+  </head>
+
+  <body>
+
+    <div id="all">
+
+        {{ partial "top.html" . }}
+
+        {{ partial "nav.html" . }}
+
+        {{ if default true .Site.Params.home_sections.hero }}
+        {{ partial "hero.html" . }}
+        {{ end }}
+
+        {{ if default true .Site.Params.home_sections.about_mini }}
+        {{ partial "about_mini.html" . }}
+        {{ end }}
+        
+        {{ if default true .Site.Params.home_sections.shows }}
+        {{ partial "shows.html" . }}
+        {{ end }}
+
+       <!-- {{ partial "carousel.html" . }} -->
+
+        {{ if default true .Site.Params.home_sections.features }}
+        {{ partial "features.html" . }}
+        {{ end }}
+
+        {{ if default true .Site.Params.home_sections.testimonials }}
+        {{ partial "testimonials.html" . }}
+        {{ end }}
+
+        {{ if default true .Site.Params.home_sections.see_more }}
+        {{ partial "see_more.html" . }}
+        {{ end }}
+
+        {{ if default true .Site.Params.home_sections.recent_posts }}
+        {{ partial "recent_posts.html" . }}
+        {{ end }}
+
+        {{ if default true .Site.Params.home_sections.clients }}
+        {{ partial "clients.html" . }}
+        {{ end }}
+
+        {{ partial "footer.html" . }}
+
+    </div>
+    <!-- /#all -->
+
+    {{ partial "scripts.html" . }}
+
+  </body>
+</html>

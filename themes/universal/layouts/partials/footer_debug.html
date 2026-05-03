@@ -1,0 +1,4 @@
+﻿{{ $menu := .Site.Menus.main }}
+{{ range $menu }}
+<div>{{ .Name }} | url={{ .URL }} | params={{ printf "%#v" .Params }}</div>
+{{ end }}

@@ -1,0 +1,34 @@
+{{ $title := or .Params.page_hero_title .Params.hero_title "" }}
+{{ $text := or .Params.page_hero_text .Params.hero_text "" }}
+{{ $buttonText := or .Params.page_hero_button_text .Params.hero_button_text .Params.hero_button "" }}
+{{ $buttonURL := or .Params.page_hero_button_url .Params.hero_button_url "" }}
+{{ $bgColor := or .Params.page_hero_bg_color .Params.hero_bg_color "#111111" }}
+{{ $textColor := or .Params.page_hero_text_color .Params.hero_text_color "#ffffff" }}
+{{ $media := or .Params.page_hero_media .Params.hero_media "" }}
+{{ $mediaType := lower (or .Params.page_hero_media_type .Params.hero_media_type "") }}
+{{ $overlay := or .Params.page_hero_overlay .Params.hero_overlay "rgba(0,0,0,0.35)" }}
+
+{{ if and $media (eq $mediaType "") }}
+  {{ if hasSuffix (lower $media) ".webm" }}{{ $mediaType = "video" }}{{ else }}{{ $mediaType = "image" }}{{ end }}
+{{ end }}
+
+{{ $buttonHref := $buttonURL }}
+{{ if and $buttonURL (not (or (hasPrefix $buttonURL "http://") (hasPrefix $buttonURL "https://") (hasPrefix $buttonURL "mailto:") (hasPrefix $buttonURL "tel:") (hasPrefix $buttonURL "#"))) }}
+  {{ $buttonHref = relLangURL $buttonURL }}
+{{ end }}
+
+<section class="page-hero" style="--page-hero-bg: {{ $bgColor }}; --page-hero-fg: {{ $textColor }}; --page-hero-overlay: {{ $overlay }};">
+  {{ if and $media (eq $mediaType "video") }}
+    <video class="page-hero__media page-hero__media--video" src="{{ $media | relURL }}" autoplay muted loop playsinline></video>
+  {{ else if and $media (eq $mediaType "image") }}
+    <img class="page-hero__media page-hero__media--image" src="{{ $media | relURL }}" alt="{{ .Title }}">
+  {{ end }}
+  <div class="page-hero__overlay"></div>
+  <div class="container page-hero__content">
+    {{ with $title }}<h1 class="page-hero__title">{{ . | markdownify }}</h1>{{ end }}
+    {{ with $text }}<p class="page-hero__text">{{ . | markdownify }}</p>{{ end }}
+    {{ if and $buttonText $buttonURL }}
+      <p class="page-hero__actions"><a class="btn btn-template-main" href="{{ $buttonHref }}">{{ $buttonText | markdownify }}</a></p>
+    {{ end }}
+  </div>
+</section>

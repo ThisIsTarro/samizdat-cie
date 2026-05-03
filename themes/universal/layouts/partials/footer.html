@@ -1,0 +1,127 @@
+<footer id="footer" class="site-footer">
+    <div class="container site-footer__top">
+        <div class="site-footer__brand col-md-4 col-sm-12">
+            <a class="site-footer__logo-link" href="{{ "/" | relLangURL }}" aria-label="{{ .Site.Title }}">
+                <img class="site-footer__logo" src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}">
+            </a>
+            {{ with .Site.Params.about_us }}
+            <div class="site-footer__intro">{{ . | safeHTML }}</div>
+            {{ end }}
+            <div class="site-footer__socials">
+                {{ with (or .Site.Params.social.instagram .Site.Params.social_instagram) }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>{{ end }}
+                {{ with (or .Site.Params.social.facebook .Site.Params.social_facebook) }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>{{ end }}
+                {{ with (or .Site.Params.social.youtube .Site.Params.social_youtube) }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>{{ end }}
+                {{ with (or .Site.Params.social.linkedin .Site.Params.social_linkedin) }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>{{ end }}
+                {{ with (or .Site.Params.social.tiktok .Site.Params.social_tiktok) }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>{{ end }}
+            </div>
+        </div>
+
+        <div class="site-footer__nav col-md-8 col-sm-12">
+            {{ $scratch := newScratch }}
+            {{ $scratch.Set "groups" (dict) }}
+            {{ $scratch.Set "groupNames" (slice) }}
+            {{ $scratch.Set "seen" (dict) }}
+
+            {{ $menu := .Site.Menus.main }}
+            {{ if gt (len $menu) 0 }}
+                {{ range where $menu "Parent" "" }}
+                    {{ $entries := slice . }}
+                    {{ range .Children }}
+                        {{ $entries = $entries | append . }}
+                    {{ end }}
+
+                    {{ range $entries }}
+                        {{ if .URL }}
+                            {{ $rawURL := .URL }}
+                            {{ $isExternal := or (hasPrefix $rawURL "http://") (hasPrefix $rawURL "https://") (hasPrefix $rawURL "mailto:") (hasPrefix $rawURL "tel:") (hasPrefix $rawURL "#") }}
+                            {{ $href := $rawURL }}
+                            {{ if not $isExternal }}
+                                {{ $href = $rawURL | relLangURL }}
+                            {{ end }}
+
+                            {{ $seen := $scratch.Get "seen" }}
+                            {{ if not (index $seen $href) }}
+                                {{ $group := or .Params.footer_group .Params.footer_category "" }}
+                                {{ if and (eq $group "") (not $isExternal) }}
+                                    {{ $path := replaceRE "^/+|/+$" "" $rawURL }}
+                                    {{ with site.GetPage $path }}
+                                        {{ $group = or .Params.footer_group .Params.footer_category "" }}
+                                    {{ end }}
+                                {{ end }}
+                                {{ if eq $group "" }}{{ $group = "Autres" }}{{ end }}
+
+                                {{ $groups := $scratch.Get "groups" }}
+                                {{ $items := index $groups $group }}
+                                {{ if not $items }}{{ $items = slice }}{{ end }}
+                                {{ $items = $items | append (dict "name" .Name "href" $href) }}
+                                {{ $scratch.Set "groups" (merge $groups (dict $group $items)) }}
+
+                                {{ $groupNames := $scratch.Get "groupNames" }}
+                                {{ if not (in $groupNames $group) }}
+                                    {{ $scratch.Set "groupNames" ($groupNames | append $group) }}
+                                {{ end }}
+
+                                {{ $scratch.Set "seen" (merge $seen (dict $href true)) }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+
+            {{ range site.RegularPages }}
+                {{ $group := or .Params.footer_group .Params.footer_category "" }}
+                {{ if $group }}
+                    {{ $href := .RelPermalink }}
+                    {{ $seen := $scratch.Get "seen" }}
+                    {{ if not (index $seen $href) }}
+                        {{ $groups := $scratch.Get "groups" }}
+                        {{ $items := index $groups $group }}
+                        {{ if not $items }}{{ $items = slice }}{{ end }}
+                        {{ $items = $items | append (dict "name" .Title "href" $href) }}
+                        {{ $scratch.Set "groups" (merge $groups (dict $group $items)) }}
+
+                        {{ $groupNames := $scratch.Get "groupNames" }}
+                        {{ if not (in $groupNames $group) }}
+                            {{ $scratch.Set "groupNames" ($groupNames | append $group) }}
+                        {{ end }}
+
+                        {{ $scratch.Set "seen" (merge $seen (dict $href true)) }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+
+            {{ range ($scratch.Get "groupNames") }}
+            <div class="site-footer__group">
+                <h4>{{ . | markdownify }}</h4>
+                <ul class="site-footer__links">
+                    {{ $groupName := . }}
+                    {{ range (index ($scratch.Get "groups") $groupName) }}
+                    <li><a href="{{ .href }}">{{ .name | markdownify }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</footer>
+
+<div id="copyright" class="site-footer__bottom">
+    <div class="container">
+        <div class="col-md-12">
+            <p class="pull-left">
+                {{ with .Site.Params.copyright }}
+                    {{ . | safeHTML }}
+                {{ else }}
+                    © {{ now.Year }} {{ .Site.Title }}
+                {{ end }}
+            </p>
+            <p class="pull-right">
+              Design et développement par <a href="">Resolve Interactive</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="back-to-top-fab" aria-label="Revenir en haut de page">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+</button>

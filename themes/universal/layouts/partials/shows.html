@@ -1,0 +1,55 @@
+{{ $shows := where site.RegularPages "Section" "shows" }}
+{{ if gt (len $shows) 0 }}
+{{ $shows = sort $shows ".Params.weight" }}
+{{ $showsBg := default "#000000" .Site.Params.shows_section_bg_color }}
+{{ $showsText := default "#ffffff" .Site.Params.shows_section_text_color }}
+<section id="shows" class="shows-section" style="--shows-section-bg: {{ $showsBg }}; --shows-section-fg: {{ $showsText }};">
+    <div class="container">
+        <div class="shows-section__heading">
+            <h1 class="about-why__title">Nos spectacles</h1>
+        </div>
+        <div class="shows-grid">
+            {{ range first 3 $shows }}
+            {{ $image := or .Params.image .Params.picture "img/banners/banner-1.jpg" }}
+            {{ $date := or .Params.show_date .Params.date }}
+            {{ $time := or .Params.show_time .Params.hour .Params.time }}
+            {{ $summary := or .Params.summary .Params.small_text (truncate 180 .Plain) }}
+            {{ $ticketURL := or .Params.ticket_url .Params.buy_url .Params.link "#" }}
+            {{ $ticketText := or .Params.ticket_text .Params.link_text "Réserver" }}
+            {{ $audience := or .Params.audience .Params.age .Params.audience_age }}
+            {{ $awardsRaw := or .Params.awards .Params.award }}
+            {{ $awards := slice }}
+            {{ if $awardsRaw }}
+              {{ if reflect.IsSlice $awardsRaw }}
+                {{ $awards = $awardsRaw }}
+              {{ else }}
+                {{ $awards = slice $awardsRaw }}
+              {{ end }}
+            {{ end }}
+            <article class="show-card">
+                <div class="show-card__image-wrap">
+                    <a class="show-card__image-link" href="{{ .RelPermalink }}">
+                        <img class="show-card__image" src="{{ $image | relURL }}" alt="{{ .Title }}">
+                    </a>
+                    <div class="show-card__actions">
+                        <a class="btn btn-template-transparent-primary show-card__cta show-card__cta--secondary" href="{{ .RelPermalink }}">{{ "En savoir plus" | markdownify }}</a>
+                        <a class="btn btn-template-main show-card__cta" href="{{ $ticketURL }}">{{ $ticketText | markdownify }}</a>
+                    </div>
+                </div>
+                <div class="show-card__content">
+                    <h3 class="show-card__title"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h3>
+                    {{ with .Params.subtitle }}<p class="show-card__subtitle">{{ . | markdownify }}</p>{{ end }}
+                    <p class="show-card__meta">
+                        {{ range $awards }}<span class="show-meta-award"><i class="fas fa-trophy" aria-hidden="true"></i>{{ . | markdownify }}</span>{{ end }}
+                        {{ with $date }}<span>{{ . | markdownify }}</span>{{ end }}
+                        {{ with $time }}<span>{{ . | markdownify }}</span>{{ end }}
+                        {{ with $audience }}<span class="show-card__audience">{{ . | markdownify }}</span>{{ end }}
+                    </p>
+                    {{ with $summary }}<p class="show-card__summary">{{ . | markdownify }}</p>{{ end }}
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

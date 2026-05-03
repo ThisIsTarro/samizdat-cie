@@ -1,0 +1,8 @@
+.hugo_build.lock
+node_modules/
+public/
+resources/
+*.log
+tmp-*.txt
+lighthouse-seo-report.report.html
+lighthouse-seo-report.report.json

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    {{ partial "headers.html" . }}
+    {{ partial "custom_headers.html" . }}
+  </head>
+  <body class="page-show">
+    {{ $showNavColor := default "#111111" (or .Params.show_nav_text_color .Params.show_banner_text_color) }}
+    {{ $showNavLogoFilter := default "none" .Params.show_nav_logo_filter }}
+    <div id="all" style="--show-nav-color: {{ $showNavColor }}; --show-nav-logo-filter: {{ $showNavLogoFilter }};">
+      {{ partial "top.html" . }}
+      {{ partial "nav.html" . }}
+
+      {{ $heroImage := default "img/banners/banner-1.jpg" .Params.hero_image }}
+      {{ $gallery := .Params.gallery_images }}
+      {{ if not $gallery }}
+        {{ $gallery = slice $heroImage }}
+      {{ end }}
+      {{ $quoteImage := default $heroImage .Params.quote_image }}
+      {{ $scriptURL := default "" .Params.script_url }}
+      {{ $scriptButton := default "Plus d'informations" .Params.script_button_text }}
+      {{ $ticketURL := default "" .Params.ticket_url }}
+      {{ $ticketText := or .Params.ticket_label .Params.ticket_text }}
+      {{ $schoolScheduleURL := default "" .Params.school_schedule_url }}
+      {{ $learningBrochureURL := default "" .Params.learning_brochure_url }}
+      {{ $learningBrochureText := .Params.learning_brochure_text }}
+      {{ $artisticBrochureURL := default "" .Params.artistic_brochure_url }}
+      {{ $artisticBrochureText := .Params.artistic_brochure_text }}
+      {{ $bannerBG := default "#fff7f3" .Params.show_banner_bg_color }}
+      {{ $bannerText := default "#111111" .Params.show_banner_text_color }}
+      {{ $bannerPoster := default (default $heroImage .Params.image) .Params.show_banner_poster }}
+      {{ $awardsRaw := or .Params.awards .Params.award }}
+      {{ $awards := slice }}
+      {{ if $awardsRaw }}
+        {{ if reflect.IsSlice $awardsRaw }}
+          {{ $awards = $awardsRaw }}
+        {{ else }}
+          {{ $awards = slice $awardsRaw }}
+        {{ end }}
+      {{ end }}
+      {{ $heroVideoURL := default "" .Params.hero_video_url }}
+      {{ $heroVideoType := default "" .Params.hero_video_type }}
+      {{ $videoLower := lower $heroVideoURL }}
+      {{ $isYouTube := or (eq $heroVideoType "youtube") (and (eq $heroVideoType "") (or (in $videoLower "youtube.com") (in $videoLower "youtu.be"))) }}
+      {{ $isWebm := or (eq $heroVideoType "webm") (and (eq $heroVideoType "") (hasSuffix $videoLower ".webm")) }}
+      {{ $youtubeID := "" }}
+      {{ if and $isYouTube $heroVideoURL }}
+        {{ $youtubeID = replaceRE `^.*(?:youtu\.be/|v=|embed/|shorts/)([A-Za-z0-9_-]{11}).*$` `$1` $heroVideoURL }}
+      {{ end }}
+
+      <section class="show-single-banner" style="--show-banner-bg: {{ $bannerBG }}; --show-banner-fg: {{ $bannerText }};">
+        <div class="container">
+          <div class="show-single-banner__inner">
+            <div class="show-single-banner__poster-wrap">
+              <img class="show-single-banner__poster" src="{{ $bannerPoster | relURL }}" alt="{{ .Title }}">
+            </div>
+            <div class="show-single-banner__content">
+              <h1 class="show-single__title">{{ .Title | markdownify }}</h1>
+              {{ with .Params.subtitle }}<p class="show-single__subtitle">{{ . | markdownify }}</p>{{ end }}
+
+              <div class="show-single__meta">
+                {{ range $awards }}<span class="show-meta-award"><i class="fas fa-trophy" aria-hidden="true"></i>{{ . | markdownify }}</span>{{ end }}
+                {{ with (or .Params.show_date .Params.date) }}<span>{{ . | markdownify }}</span>{{ end }}
+                {{ with (or .Params.duration .Params.show_duration) }}<span>{{ . | markdownify }}</span>{{ end }}
+                {{ with (or .Params.audience .Params.age .Params.audience_age) }}<span>{{ . | markdownify }}</span>{{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {{ if and $heroVideoURL (or $isWebm (and $isYouTube (eq (len $youtubeID) 11))) }}
+      <section class="show-video-hero{{ if and $isYouTube (eq (len $youtubeID) 11) }} show-video-hero--youtube{{ end }}">
+        {{ if and $isYouTube (eq (len $youtubeID) 11) }}
+        <iframe
+          id="show-video-hero-player"
+          class="show-video-hero__frame"
+          src="https://www.youtube.com/embed/{{ $youtubeID }}?autoplay=1&mute=1&controls=0&loop=1&playlist={{ $youtubeID }}&playsinline=1&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+          title="{{ .Title }}"
+          loading="eager"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        {{ else if $isWebm }}
+        <video id="show-video-hero-player" class="show-video-hero__video" autoplay muted loop playsinline>
+          <source src="{{ $heroVideoURL | relURL }}" type="video/webm">
+        </video>
+        {{ end }}
+      </section>
+      <button
+        type="button"
+        class="show-video-hero__mute-toggle is-muted"
+        data-video-type="{{ if and $isYouTube (eq (len $youtubeID) 11) }}youtube{{ else if $isWebm }}webm{{ end }}"
+        aria-label="Activer le son"
+        aria-pressed="false">
+        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+      </button>
+      {{ else }}
+      <section class="show-single-media">
+        <div class="container">
+          <img class="show-single__hero-image" src="{{ $heroImage | relURL }}" alt="{{ .Title }}">
+        </div>
+      </section>
+      {{ end }}
+
+      <section class="show-single">
+        <div class="container">
+          <div class="show-single__grid">
+            <div class="show-single__content">
+              {{ .Content }}
+            </div>
+
+            <div class="show-single__aside-column">
+              <p class="show-single__credits-paragraph">{{ (default "Crédits" .Params.credits_paragraph) | markdownify }}</p>
+            <aside class="show-single__aside">
+              <div class="show-single__aside-list">
+                {{ with (or .Params.show_date .Params.date) }}
+                <div class="show-single__aside-item">
+                  <p class="show-single__aside-label">Dates</p>
+                  <p class="show-single__aside-value">{{ . | markdownify }}</p>
+                </div>
+                {{ end }}
+                {{ with (or .Params.duration .Params.show_duration) }}
+                <div class="show-single__aside-item">
+                  <p class="show-single__aside-label">Durée</p>
+                  <p class="show-single__aside-value">{{ . | markdownify }}</p>
+                </div>
+                {{ end }}
+                {{ with (or .Params.audience .Params.age .Params.audience_age) }}
+                <div class="show-single__aside-item">
+                  <p class="show-single__aside-label">Public</p>
+                  <p class="show-single__aside-value">{{ . | markdownify }}</p>
+                </div>
+                {{ end }}
+                {{ with .Params.notice }}
+                <div class="show-single__aside-item">
+                  <p class="show-single__aside-label">Genre</p>
+                  <p class="show-single__aside-value">{{ . | markdownify }}</p>
+                </div>
+                {{ end }}
+              </div>
+
+              <div class="show-single__aside-actions">
+                {{ if and $ticketURL $ticketText }}
+                <a class="btn btn-template-main" href="{{ $ticketURL }}">
+                  {{ $ticketText | markdownify }}
+                </a>
+                {{ else if and $scriptURL $scriptButton }}
+                <a class="btn btn-template-main" href="{{ $scriptURL }}">
+                  {{ $scriptButton | markdownify }}
+                </a>
+                {{ end }}
+                {{ if and $learningBrochureURL $learningBrochureText }}
+                <a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL }}">{{ $learningBrochureText | markdownify }}</a>
+                {{ end }}
+                {{ if and $artisticBrochureURL $artisticBrochureText }}
+                <a class="btn btn-template-transparent-primary" href="{{ $artisticBrochureURL }}">{{ $artisticBrochureText | markdownify }}</a>
+                {{ end }}
+              </div>
+            </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="show-gallery">
+        <div class="container">
+          <div class="show-gallery__grid">
+            {{ range $gallery }}
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+            {{ end }}
+          </div>
+        </div>
+      </section>
+
+      {{ with .Params.public_tickets }}
+      <section id="show-ticketing" class="show-ticketing">
+        <div class="container">
+          <h2>Billeterie</h2>
+          <div class="show-ticketing__list">
+            {{ range . }}
+            <article class="show-ticketing__item">
+              {{ with .state }}<p class="show-ticketing__state">{{ . }}</p>{{ end }}
+              {{ with .city }}<h3>{{ . | markdownify }}</h3>{{ end }}
+              {{ with .venue }}<p class="show-ticketing__venue">{{ . | markdownify }}</p>{{ end }}
+              {{ with .dates }}<p class="show-ticketing__dates">{{ . | markdownify }}</p>{{ end }}
+              {{ if and .url $ticketText }}
+              <a class="btn btn-template-main" href="{{ . }}">
+                {{ $ticketText | markdownify }}
+              </a>
+              {{ end }}
+            </article>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+      {{ end }}
+
+      {{ with .Params.about_the_show }}
+      <section class="show-around">
+        <div class="container">
+          <h2>Autour de la pièce</h2>
+          <div class="show-around__content">
+            {{ . | markdownify }}
+          </div>
+        </div>
+      </section>
+      {{ end }}
+
+      {{ if $schoolScheduleURL }}
+      <section class="show-school">
+        <div class="container">
+          <h2>À l'attention des scolaires</h2>
+          <p>Vous planifiez une sortie scolaire ? Trouvez les dates et les informations sur les billets pour une représentation près de votre école.</p>
+          <div class="show-school__links">
+            {{ with $schoolScheduleURL }}<a class="btn btn-template-main" href="{{ . }}">Calendrier des spectacles scolaires</a>{{ end }}
+            {{ if and $learningBrochureURL $learningBrochureText }}<a class="btn btn-template-transparent-primary" href="{{ $learningBrochureURL }}">{{ $learningBrochureText | markdownify }}</a>{{ end }}
+          </div>
+        </div>
+      </section>
+      {{ end }}
+
+      <section class="show-quote">
+        <div class="container">
+          <img class="show-quote__image" src="{{ $quoteImage | relURL }}" alt="{{ .Title }}">
+          <blockquote>
+            {{ with .Params.quote_text }}{{ . | markdownify }}{{ else }}{{ "Les spectacles jeune public peuvent transformer notre regard sur le monde." | markdownify }}{{ end }}
+          </blockquote>
+          {{ with .Params.quote_author }}<p class="show-quote__author">{{ . | markdownify }}</p>{{ end }}
+        </div>
+      </section>
+
+      {{ with .Params.creative_team }}
+      <section class="show-team">
+        <div class="container">
+          <h2>L'équipe du spectacle</h2>
+          <div class="show-team__grid">
+            {{ range . }}
+            <div>
+              <p class="show-team__role">{{ .role | markdownify }}</p>
+              <p class="show-team__name">{{ .name | markdownify }}</p>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+      {{ end }}
+
+      {{ with $scriptURL }}
+      <section class="show-script">
+        <div class="container">
+          <h2>Vous souhaitez programmer ce spectacle ?</h2>
+          <a class="btn btn-template-main" href="{{ . }}">{{ $scriptButton | markdownify }}</a>
+        </div>
+      </section>
+      {{ end }}
+
+      {{ with .Params.acknowledgements }}
+      <section class="show-acknowledgements">
+        <div class="container">
+          <h2>Remerciements</h2>
+          <div class="show-acknowledgements__logos">
+            {{ range . }}
+            <a href="{{ .url }}">
+              <img src="{{ .image | relURL }}" alt="{{ default "Logo partenaire" .alt }}">
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+      {{ end }}
+
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

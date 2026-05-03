@@ -1,0 +1,17 @@
+name = "Universal"
+license = "MIT"
+licenselink = ""
+description = "
+homepage = ""
+tags = ""
+features = ""
+min_version = 0.15
+
+[author]
+    name = "samizdat"
+    homepage = ""
+
+# If Porting existing theme
+[original]
+    author =  "Resolve Interactive"
+    homepage = ""

@@ -1,0 +1,325 @@
+{{ template "_internal/google_analytics.html" . }}
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0/jquery.counterup.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+{{ if and .Site.Params.enableGoogleMaps .Site.Params.googleMapsApiKey }}
+<script src="//maps.googleapis.com/maps/api/js?key={{.Site.Params.googleMapsApiKey}}&v=3.exp"></script>
+<script src="{{ "js/hpneo.gmaps.js" | relURL }}"></script>
+<script src="{{ "js/gmaps.init.js" | relURL }}"></script>
+{{ end }}
+{{ if and .Site.Params.enableRecaptchaInContactForm .Site.Params.googleRecaptchaKey }}
+<script src="//www.google.com/recaptcha/api.js" async defer></script>
+{{ end }}
+<script src="{{ "js/front.js" | relURL }}"></script>
+
+<!-- owl carousel -->
+<script src="{{ "js/owl.carousel.min.js" | relURL }}"></script>
+
+<script>
+  (function () {
+    function parseRgb(str) {
+      if (!str) return null;
+      var m = str.match(/rgba?\(([^)]+)\)/i);
+      if (!m) return null;
+      var parts = m[1].split(',').map(function (s) { return parseFloat(s.trim()); });
+      if (parts.length < 3) return null;
+      return {
+        r: parts[0],
+        g: parts[1],
+        b: parts[2],
+        a: parts.length >= 4 ? parts[3] : 1
+      };
+    }
+
+    function relativeLuminance(r, g, b) {
+      function channel(v) {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      }
+      return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+    }
+
+    function firstOpaqueBg(el) {
+      var node = el;
+      while (node && node !== document.documentElement) {
+        var bg = parseRgb(window.getComputedStyle(node).backgroundColor);
+        if (bg && bg.a > 0.01) return bg;
+        node = node.parentElement;
+      }
+      return parseRgb(window.getComputedStyle(document.body).backgroundColor) || { r: 255, g: 255, b: 255, a: 1 };
+    }
+
+    function firstOpaqueFromElements(elements) {
+      for (var i = 0; i < elements.length; i += 1) {
+        var el = elements[i];
+        if (!el) continue;
+        var bg = parseRgb(window.getComputedStyle(el).backgroundColor);
+        if (bg && bg.a > 0.01) return bg;
+      }
+      return null;
+    }
+
+    function updateNavContrast() {
+      var body = document.body;
+      var header = document.querySelector('.navbar-affixed-top') || document.querySelector('header');
+      if (!body || !header) return;
+
+      var rect = header.getBoundingClientRect();
+      var y = Math.min(window.innerHeight - 1, Math.max(0, Math.round(rect.bottom + 6)));
+      var x = Math.round(window.innerWidth / 2);
+      var target = document.elementFromPoint(x, y);
+      var stack = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [];
+      if (stack && stack.length) {
+        for (var i = 0; i < stack.length; i += 1) {
+          var candidate = stack[i];
+          if (!candidate) continue;
+          if (candidate.closest('.navbar-affixed-top, .navbar, #navigation, .dropdown-menu, .yamm-content')) {
+            continue;
+          }
+          target = candidate;
+          break;
+        }
+      }
+      if (!target) return;
+
+      var navBg = firstOpaqueFromElements([
+        header.querySelector('.navbar-default'),
+        header.querySelector('.navbar'),
+        header
+      ]);
+
+      var hero = target.closest('.home-hero');
+      var heroBg = null;
+      if (hero) {
+        heroBg = firstOpaqueFromElements([
+          hero.querySelector('.hero-overlay'),
+          hero
+        ]);
+      }
+
+      var bg = navBg || heroBg || firstOpaqueBg(target);
+      var lum = relativeLuminance(bg.r, bg.g, bg.b);
+      var useLight = lum < 0.45;
+
+      body.classList.toggle('nav-contrast-light', useLight);
+      body.classList.toggle('nav-contrast-dark', !useLight);
+
+      var desktopLogo = document.querySelector('.js-nav-logo-desktop');
+      if (desktopLogo) {
+        var darkSrc = desktopLogo.getAttribute('data-logo-dark') || desktopLogo.getAttribute('src');
+        var lightSrc = desktopLogo.getAttribute('data-logo-light') || darkSrc;
+        desktopLogo.setAttribute('src', useLight ? lightSrc : darkSrc);
+      }
+    }
+
+    var ticking = false;
+    var wasAtTop = window.scrollY <= 2;
+    var topBurstTimer = null;
+    var topBurstCount = 0;
+
+    function scheduleTopBurst() {
+      if (topBurstTimer) {
+        clearInterval(topBurstTimer);
+      }
+      topBurstCount = 0;
+      topBurstTimer = setInterval(function () {
+        updateNavContrast();
+        topBurstCount += 1;
+        if (topBurstCount >= 8) {
+          clearInterval(topBurstTimer);
+          topBurstTimer = null;
+        }
+      }, 90);
+    }
+
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        updateNavContrast();
+        var atTop = window.scrollY <= 2;
+        if (atTop && !wasAtTop) {
+          scheduleTopBurst();
+        }
+        wasAtTop = atTop;
+      });
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    window.addEventListener('load', requestUpdate);
+    window.addEventListener('pageshow', requestUpdate);
+    document.addEventListener('DOMContentLoaded', requestUpdate);
+    setTimeout(requestUpdate, 200);
+    requestUpdate();
+  })();
+</script>
+
+<script>
+  (function () {
+    function initBackToTopFab() {
+      var button = document.querySelector(".back-to-top-fab");
+      if (!button) return;
+
+      function updateVisibility() {
+        var show = window.scrollY > 24;
+        button.classList.toggle("is-visible", show);
+      }
+
+      button.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("scroll", updateVisibility, { passive: true });
+      window.addEventListener("resize", updateVisibility);
+      updateVisibility();
+    }
+
+    document.addEventListener("DOMContentLoaded", initBackToTopFab);
+    window.addEventListener("load", initBackToTopFab);
+  })();
+</script>
+
+<script>
+  (function () {
+    function blockMediaContextMenu(event) {
+      var target = event.target;
+      if (!target) return;
+
+      if (target.closest("img, video, picture")) {
+        event.preventDefault();
+      }
+    }
+
+    function blockMediaDragStart(event) {
+      var target = event.target;
+      if (!target) return;
+
+      if (target.closest("img, video, picture")) {
+        event.preventDefault();
+      }
+    }
+
+    document.addEventListener("contextmenu", blockMediaContextMenu, true);
+    document.addEventListener("dragstart", blockMediaDragStart, true);
+  })();
+</script>
+
+<script>
+  (function () {
+    function setMutedState(button, muted) {
+      if (!button) return;
+      button.classList.toggle("is-muted", muted);
+      button.setAttribute("aria-pressed", muted ? "false" : "true");
+      button.setAttribute("aria-label", muted ? "Activer le son" : "Couper le son");
+      var icon = button.querySelector("i");
+      if (!icon) return;
+      icon.classList.remove("fa-volume-xmark", "fa-volume-high");
+      icon.classList.add(muted ? "fa-volume-xmark" : "fa-volume-high");
+    }
+
+    function initShowHeroMuteToggle() {
+      var button = document.querySelector(".show-video-hero__mute-toggle");
+      var player = document.getElementById("show-video-hero-player");
+      if (!button || !player) return;
+
+      var type = (button.getAttribute("data-video-type") || "").toLowerCase();
+      var muted = true;
+      setMutedState(button, muted);
+
+      button.addEventListener("click", function () {
+        muted = !muted;
+
+        if (type === "webm" && player instanceof HTMLVideoElement) {
+          player.muted = muted;
+        } else if (type === "youtube" && player.tagName === "IFRAME") {
+          var command = muted ? "mute" : "unMute";
+          player.contentWindow.postMessage(
+            JSON.stringify({ event: "command", func: command, args: [] }),
+            "*"
+          );
+        }
+
+        setMutedState(button, muted);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initShowHeroMuteToggle);
+    window.addEventListener("load", initShowHeroMuteToggle);
+  })();
+</script>
+
+<script>
+  (function () {
+    function initMobileMenuScrollLock() {
+      var body = document.body;
+      var nav = document.getElementById("navigation");
+      if (!body || !nav) return;
+
+      function updateLockState() {
+        var isMobile = window.innerWidth <= 991;
+        var isOpen = nav.classList.contains("in");
+        body.classList.toggle("mobile-nav-open", isMobile && isOpen);
+      }
+
+      if (window.jQuery) {
+        window.jQuery(nav).on("shown.bs.collapse hidden.bs.collapse", updateLockState);
+      }
+
+      window.addEventListener("resize", updateLockState);
+      window.addEventListener("load", updateLockState);
+      updateLockState();
+    }
+
+    document.addEventListener("DOMContentLoaded", initMobileMenuScrollLock);
+  })();
+</script>
+
+<script>
+  (function () {
+    function normalize(str) {
+      return (str || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function iconForCTA(btn) {
+      var href = normalize(btn.getAttribute("href") || "");
+      var text = normalize(btn.textContent || "");
+
+      if (href.indexOf("mailto:") === 0 || href.indexOf("contact") !== -1 || text.indexOf("contact") !== -1) return "fas fa-envelope";
+      if (href.indexOf("tel:") === 0) return "fas fa-phone";
+      if (text.indexOf("reserver") !== -1 || text.indexOf("ticket") !== -1 || text.indexOf("billet") !== -1 || text.indexOf("book") !== -1 || text.indexOf("buy") !== -1) return "fas fa-ticket-alt";
+      if (text.indexOf("calendrier") !== -1 || text.indexOf("date") !== -1 || text.indexOf("schedule") !== -1) return "fas fa-calendar-alt";
+      if (text.indexOf("dossier") !== -1 || text.indexOf("brochure") !== -1 || href.indexOf(".pdf") !== -1) return "fas fa-file-alt";
+      if (text.indexOf("script") !== -1 || text.indexOf("texte") !== -1) return "fas fa-book-open";
+      if (text.indexOf("voir") !== -1 || text.indexOf("decouvrir") !== -1 || text.indexOf("discover") !== -1 || text.indexOf("learn") !== -1 || text.indexOf("plus d'informations") !== -1) return "fas fa-arrow-right";
+      if (href.indexOf("http://") === 0 || href.indexOf("https://") === 0) return "fas fa-external-link-alt";
+      return "fas fa-arrow-right";
+    }
+
+    function decorateCTAs() {
+      var buttons = document.querySelectorAll("a.btn, button.btn");
+      buttons.forEach(function (btn) {
+        if (btn.querySelector("i")) return;
+        var iconClass = iconForCTA(btn);
+        if (!iconClass) return;
+
+        var icon = document.createElement("i");
+        icon.className = iconClass + " cta-icon";
+        icon.setAttribute("aria-hidden", "true");
+        btn.appendChild(document.createTextNode(" "));
+        btn.appendChild(icon);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", decorateCTAs);
+    window.addEventListener("load", decorateCTAs);
+  })();
+</script>

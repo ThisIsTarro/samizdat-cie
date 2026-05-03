@@ -1,0 +1,28 @@
+{{ $aboutPage := or (site.GetPage "/apropos") (site.GetPage "page" "apropos.md") }}
+{{ $title := "Pourquoi le théâtre ?" }}
+{{ $text := "Nous pensons que l'expérience du théâtre vivant apporte énormément aux jeunes : elle nourrit l'empathie, stimule la créativité et leur donne confiance pour explorer leurs émotions." }}
+{{ $button := "En savoir plus" }}
+{{ $bgColor := "#fff7f3" }}
+{{ $url := "/apropos" | relLangURL }}
+
+{{ with $aboutPage }}
+    {{ with (or .Params.hero_title .Params.page_hero_title) }}{{ $title = . }}{{ end }}
+    {{ with (or .Params.hero_text .Params.page_hero_text) }}{{ $text = . }}{{ end }}
+    {{ with .Params.hero_button }}{{ $button = . }}{{ end }}
+    {{ with (or .Params.hero_bg_color .Params.page_hero_bg_color) }}{{ $bgColor = . }}{{ end }}
+    {{ $url = .RelPermalink }}
+{{ end }}
+
+<section class="about-why" style="background-color: {{ $bgColor }};">
+    <div class="container">
+        <div class="about-why__inner">
+            <div class="about-why__intro">
+                <h1 class="about-why__title">{{ $title | markdownify }}</h1>
+            </div>
+            <div class="about-why__content">
+                <p class="about-why__text">{{ $text | markdownify }}</p>
+                <a class="btn btn-template-main about-why__link" href="{{ $url }}">{{ $button | markdownify }}</a>
+            </div>
+        </div>
+    </div>
+</section>
