@@ -14,7 +14,8 @@
         <article class="company-person">
           <div class="company-person__media">
             {{ with .photo }}
-              <img class="company-person__photo" src="{{ . | relURL }}" alt="{{ $fullName }}">
+              {{ $photoPath := . | strings.TrimPrefix "/" }}
+              <img class="company-person__photo" src="{{ $photoPath | relURL }}" alt="{{ $fullName }}">
             {{ end }}
           </div>
           <div class="company-person__content">
