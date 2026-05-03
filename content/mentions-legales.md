@@ -18,7 +18,7 @@ Coordonnées :
 
 Le site est hébergé par :
 
-- Hébergeur : **[Nom de l’hébergeur]**
+- Hébergeur : **Microsoft**
 - Adresse : **[Adresse de l’hébergeur]**
 - Site web : **[URL de l’hébergeur]**
 
