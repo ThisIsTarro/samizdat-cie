@@ -98,3 +98,7 @@ cleanDestinationDir = true
     weight = 4
     [menu.main.params]
         footer_group = "Contact"
+
+[[menu.main]]
+    [menu.main.params]
+        footer_group = "Mentions légales"
