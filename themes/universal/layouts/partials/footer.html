@@ -107,14 +107,18 @@
 
 <div id="copyright" class="site-footer__bottom">
     <div class="container">
-        <div class="col-md-12">
-            <p class="pull-left">
+        <div class="col-md-12">              
+
+            <p class="pull-left" >
                 {{ with .Site.Params.copyright }}
                     {{ . | safeHTML }}
                 {{ else }}
                     © {{ now.Year }} {{ .Site.Title }}
-                {{ end }}
-            </p>
+                {{ end }}.
+            </p> 
+            <p class="pull-left" style="
+    margin: 4px;
+"><a href="/mentions-legales">Mentions légales</a></p>
             <p class="pull-right">
               Design et développement par <a href="">Resolve Interactive</a>.
             </p>

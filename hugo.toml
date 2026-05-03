@@ -99,6 +99,3 @@ cleanDestinationDir = true
     [menu.main.params]
         footer_group = "Contact"
 
-[[menu.main]]
-    [menu.main.params]
-        footer_group = "Mentions légales"
