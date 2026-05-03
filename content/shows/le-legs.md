@@ -135,20 +135,7 @@ name = "Antoine Ody"
 role = "Dans le rôle de la Comtesse"
 name = "Sophie Teulière"
 
-[[acknowledgements]]
-image = "img/shows/le-legs/show-06.jpeg"
-url = "mailto:samizdat.cie@gmail.com"
-alt = "Samizdat"
 
-[[acknowledgements]]
-image = "img/clients/customer-4.png"
-url = "mailto:diffusion.laciedesbrunes@gmail.com"
-alt = "Diffusion"
-
-[[acknowledgements]]
-image = "img/clients/customer-5.png"
-url = "mailto:samizdat.cie@gmail.com"
-alt = "Compagnie"
 
 [build]
 render = "always"
