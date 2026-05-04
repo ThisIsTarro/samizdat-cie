@@ -92,7 +92,7 @@
 
             {{ range ($scratch.Get "groupNames") }}
             <div class="site-footer__group">
-                <h4>{{ . | markdownify }}</h4>
+                <h3 style="color: black;">{{ . | markdownify }}</h3>
                 <ul class="site-footer__links">
                     {{ $groupName := . }}
                     {{ range (index ($scratch.Get "groups") $groupName) }}
