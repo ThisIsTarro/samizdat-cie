@@ -2,7 +2,7 @@
 title = "La Jeune Fille à la Perle"
 subtitle = "La jeune fille à la perle... n'a plus de perle !"
 description = "La Jeune Fille à la Perle : spectacle jeune public de la Compagnie Samizdat, avec vidéo, synopsis, dates et contacts."
-show_date = "Prochaines dates : Janvier 2027"
+show_date = "Prochaines dates : Du 09 Janvier 2027 au 21 Mars 2027"
 show_time = ""
 duration = "45 minutes"
 audience = "Tout public à partir de 5 ans"
@@ -19,9 +19,9 @@ show_banner_bg_color = "#230363ff"
 show_banner_text_color = "#ffffffff"
 show_nav_text_color = "missing show_nav_text_color"
 show_nav_logo_filter = "missing show_nav_logo_filter"
-quote_image = "img/shows/la-jeune-fille-a-la-perle/show-15.jpeg"
-quote_text = "\"Montrer un panel d'oeuvres célèbres aux enfants dès leur plus jeune âge, sous une forme humoristique.\""
-quote_author = "Dossier de production"
+quote_image = "img/shows/la-jeune-fille-a-la-perle/show-16.jpeg"
+quote_text = "\"Un formidable spectacle, intelligent drôle, pédagogique, pour (re)découvrir les grandes oeuvres de l'histoire de l'art en s'amusant !\""
+quote_author = "Billet Réduc'"
 script_url = "mailto:lbda.jeunefilleperle@gmail.com"
 script_button_text = "Contact Production"
 school_schedule_url = ""
@@ -41,10 +41,6 @@ Les portraits et sculptures représentés sont reconnaissables par la posture fi
 Il est important que la magie opère à chaque apparition d’oeuvre. La mise en scène repose donc sur un portant à roulettes. Celui-ci est recouvert d’un tissu noir afin d’être le plus neutre possible vis à vis de l’univers des peintures et sculptures représentées, et il est paré d’un cadre en tissu damassé doré cousu qui reprend les codes du musée, afin de faire un cadre derrière les personnages immobiles à leur apparition et ainsi, un tableau. 
 
 Quand à la fin de sa scène le personnage reprend son image fixe initiale, il est caché par le portant qui, lorsqu’il repart, offre à voir l’oeuvre suivante dans son image fixe. La protagoniste, Fridoline, annonce à chaque fois le titre, l’artiste et l’année. Pour signifier qu’elle rentre dans la peinture ou tout près de la sculpture, elle mime par un effet de jambes qu’elle chevauche le cadre ou la barrière de sécurité. Cet effet est appuyé par un changement de lumières en lien avec l’ambiance du tableau. Des musiques permettent également la transition d’un univers à l’autre sans perdre le rythme de la pièce.
-
-### Visée pédagogique 
-
-Ce spectacle propose une autre vision de l’Art et offre une lecture ludique et émotionnelle de la peinture et de la sculpture. Montrer un panel d’oeuvres célèbres aux enfants dès leur plus jeune âge, sous une forme humoristique, permet de les éduquer en douceur et, pourquoi pas, de leur donner envie d’aller au musée ! Parfois affublés d’une étiquette classique et poussiéreuse, les arts plastiques sont ici les personnages centraux du spectacle et apportent aux spectateurs une richesse, un savoir, un témoignage et une large palette d’émotions, qu’il est bon de vivre et de partager. 
 """
 gallery_images = [
   "img/shows/la-jeune-fille-a-la-perle/DSC_1294.jpeg",
@@ -86,23 +82,28 @@ La petite fille s'improvise alors détective en herbe et se lance dans une séri
 
 Drôles, absurdes ou poétiques, 17 personnages de tableaux et de sculptures célèbres prennent vie et sèment des indices à la petite enquêtrice afin de retrouver le voleur... et la perle !
 
+## Intérêt pédagogique  
+Ce spectacle propose une autre vision de l’Art et offre une lecture ludique et émotionnelle de la peinture et de la sculpture. Montrer un panel d’oeuvres célèbres aux enfants dès leur plus jeune âge, sous une forme humoristique, permet de les éduquer en douceur et de leur donner envie d’aller au musée !
+Parfois affublés d’une étiquette classique et poussiéreuse, les arts plastiques sont ici les personnages centraux du spectacle et apportent aux spectateurs une richesse, un savoir, un témoignage et une large palette d’émotions, qu’il est bon de vivre et de partager.
+
 ## Les oeuvres présentes dans le spectacle
 
-- La jeune fille à la perle, Vermeer, 1665
-- Le penseur, Rodin, 1904
-- La danseuse chez le photographe, Degas, 1874
-- Le cri, Munch, 1893
-- La femme au chapeau, Modigliani, 1918
-- Le désespéré, Courbet, 1843-1845
-- Autoportrait aux perroquets, Frida Khalo, 1941
-- L’astronome, Vermeer, 1668-1669
-- Composition with red, blue and yellow, Mondrian, 1930 
-- La liseuse, Fragonard, 1770
-- Le discobole, Myron, Ve siècle av. JC
-- Le fils de l’homme, Magritte, 1964
-- La laitière, Vermeer, 1658
-- La Joconde, Leonard de Vinci, 1503
-- Bleu n°2, Miro, 1961
-- Le vieux guitariste aveugle, Picasso, 1903-1904
-- La dame à l’hermine, Leonard de Vinci, 1489
-- Autoportrait à l’oreille bandée et à la pipe, Vincent Van Gogh, 1889
+- La jeune fille à la perle, Vermeer, 1665 - Mauritshuis, La Haye (Pays-Bas)
+- Le penseur, Rodin, 1904 - Musée Rodin, Paris (France)
+- La danseuse chez le photographe, Degas, 1874 - Musée Pouchkine, Moscou (Russie)
+- Le cri, Munch, 1893 Musée national de l'Art, de l'Architecture et du Design,  (Norvège)
+- La femme au chapeau, Modigliani, 1918 - Collection privée
+- Le désespéré, Courbet, 1843-1845 - Musée d'Orsay, Paris (France)
+- Autoportrait aux perroquets, Frida Khalo, 1941 - Collection Harold H. Stream, La Nouvelle-Orléans (USA)
+- L’astronome, Vermeer, 1668-1669 - Musée du Louvre, Paris (France)
+- Composition with red, blue and yellow, Mondrian, 1930 - Kunsthaus Zürich, Zürich (Suisse)
+- La liseuse, Fragonard, 1770 - National Gallery of Art, Washington (États-Unis)
+- Le discobole, Myron, Ve siècle av. JC - Palais Massimo alle Terme, Rome (Italie)
+- Le fils de l’homme, Magritte, 1964 - Collection privée
+- La laitière, Vermeer, 1658 - Gallery of Honour Rijksmuseum, Amsterdam (Pays-Bas)
+- La Joconde, Leonard de Vinci, 1503 - Le Louvre, Paris (France)
+- Bleu n°2, Miro, 1961 - Centre Pompidou, Paris (France)
+- Le vieux guitariste aveugle, Picasso, 1904 - Art Institute of Chicago (USA)
+- La dame à l’hermine, Leonard de Vinci, 1489 - Musée national de Cracovie, Cracovie (Pologne)
+- Autoportrait à l’oreille bandée et à la pipe, Vincent Van Gogh, 1889 - Kunsthaus Zurich (Suisse)
+

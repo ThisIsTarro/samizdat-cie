@@ -104,8 +104,21 @@ instagram = "https://www.instagram.com/elicoys/"
 photo = "/img/company/people/edouard-licoys.jpg"
 +++
 
-# A propos de nous
+## A propos de nous
 La compagnie Samizdat s’est créée dans un esprit de compagnonnage autour d’artistes qui collaborent sur scène depuis de nombreuses années. Elle leur offre un espace de création et d’accompagnement pour tous leurs projets et ce, quelles que soient les difficultés et le contexte. L’esprit Samizdat c’est faire les choses par ses propres moyens. C’est la volonté de créer malgré les embûches car l’art est ce qui nous maintient en mouvement et ce qui donne du sens à nos existences. Samizdat accueille des projets qui divertissent, interrogent et font dialoguer passé et présent. La compagnie se donne pour mission de rassembler ceux qui veulent un théâtre populaire et accessible.
 En dehors de la scène, la compagnie Samizdat tient à proposer des ateliers de médiation culturelle avec les publics scolaires de la maternelle au lycée. Ateliers de théâtre, bord plateau, art plastique, débats… Samizdat se donne pour mission de rendre les arts accessibles dès le plus jeune âge en travaillant avec les territoires sur lesquels elle intervient.
 
-N’hésitez pas à nous faire parvenir vos demandes pour une représentation ou un atelier pédagogique en milieu scolaire, nous vous répondrons dans les plus brefs délais.
+## Médiation culturelle
+
+Samizdat propose des ateliers à destination des publics scolaires de la maternelle au lycée.
+
+**Le bord plateau** (tout public), directement après la représentation, nous répondons aux questions des élèves.
+
+**L’atelier débat** (tout public) sur des thèmes développés dans nos pièce et adapté à l’âge des élèves.
+
+**L’initiation à la pratique théâtrale** (tout public), improvisation, échauffements, travail de la
+voix et du corps autour des thèmes développés dans nos spectacles.
+
+**Du texte à la scène (collège/lycée)**, nous explorons le travail de mise en scène et du comédien pour donner vie à un texte. En collaboration avec les professeurs de français nous sélectionnons des scènes de théâtre étudiées en classe et nous sollicitons les élèves pour nous mettre en scène et transformer le texte en scène de vie. Le but est de découvrir à la fois le travail du metteur en scène et l’acteur.
+
+N’hésitez pas à nous faire parvenir vos demandes par mail ([samizdat.cie@gmail.com](mailto:samizdat.cie@gmail.com)) pour une représentation ou un atelier pédagogique en milieu scolaire, nous vous répondrons dans les plus brefs délais.
