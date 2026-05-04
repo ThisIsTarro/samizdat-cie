@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="show-card__content">
-                    <h3 class="show-card__title"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h3>
+                    <h2 class="show-card__title"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h3>
                     {{ with .Params.subtitle }}<p class="show-card__subtitle">{{ . | markdownify }}</p>{{ end }}
                     <p class="show-card__meta">
                         {{ range $awards }}<span class="show-meta-award"><i class="fas fa-trophy" aria-hidden="true"></i>{{ . | markdownify }}</span>{{ end }}
