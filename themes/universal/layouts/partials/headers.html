@@ -27,22 +27,22 @@
  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="//use.fontawesome.com/releases/v6.7.2/css/all.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link as="font" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="preload" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="//use.fontawesome.com/releases/v6.7.2/css/all.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
 
 <!-- CSS animations  -->
 <link href="{{ "css/animate.css" | relURL }}" rel="stylesheet">
 
 <!-- Theme stylesheet, if possible do not edit this stylesheet -->
 {{ with .Site.Params.style }}
-  <link href="{{ "css/style" | relURL }}.{{ . }}.css" rel="stylesheet" id="theme-stylesheet">
+  <link rel="preload" as="style" href="{{ "css/style" | relURL }}.{{ . }}.css" onload="this.onload=null;this.rel='stylesheet'" id="theme-stylesheet">
 {{ else }}
-  <link href="{{ "css/style.default.css" | relURL }}" rel="stylesheet" id="theme-stylesheet">
+  <link rel="preload" as="style" href="{{ "css/style.default.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" id="theme-stylesheet">
 {{ end }}
 
 <!-- Custom stylesheet - for your changes -->
-<link href="{{ "css/custom.css" | relURL }}?{{ now.Unix }}" rel="stylesheet">
+<link rel="preload" as="style" href="{{ "css/custom.css" | relURL }}?{{ now.Unix }}" onload="this.onload=null;this.rel='stylesheet'">
 
 <!-- Responsivity for older IE -->
 {{ `
@@ -57,8 +57,8 @@
 <link rel="apple-touch-icon" href="{{ "img/logo-small.png" | relURL }}" />
 
 <!-- owl carousel CSS -->
-<link href="{{ "css/owl.carousel.css" | relURL }}" rel="stylesheet">
-<link href="{{ "css/owl.theme.css" | relURL }}" rel="stylesheet">
+<link rel="preload" as="style" href="{{ "css/owl.carousel.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="{{ "css/owl.theme.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'">
 
 <!-- RSS feed intentionally disabled -->
 
