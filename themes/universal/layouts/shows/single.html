@@ -7,7 +7,7 @@
   <body class="page-show">
     {{ $showNavColor := default "#111111" (or .Params.show_nav_text_color .Params.show_banner_text_color) }}
     {{ $showNavLogoFilter := default "none" .Params.show_nav_logo_filter }}
-    <div id="all" style="--show-nav-color: {{ $showNavColor }}; --show-nav-logo-filter: {{ $showNavLogoFilter }};">
+    <div id="all" role="main" style="--show-nav-color: {{ $showNavColor }}; --show-nav-logo-filter: {{ $showNavLogoFilter }};">
       {{ partial "top.html" . }}
       {{ partial "nav.html" . }}
 
