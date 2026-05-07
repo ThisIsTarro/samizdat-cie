@@ -36,3 +36,30 @@
         </div>
     </div>
 </section>
+<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const video = document.querySelector('.home-hero__video');
+			if (!video) return;
+
+			const tryPlay = () => {
+				video.play().catch(() => {
+					// Autoplay blocked: we keep the poster / static background.
+					// If the video ever becomes important, you could reveal
+					// a "Play" button here instead of doing nothing.
+				});
+			};
+
+			// Initial attempt as soon as DOM is ready
+			tryPlay();
+
+			// Fallback: retry once on first user interaction
+			const retryOnce = () => {
+				tryPlay();
+				window.removeEventListener('click', retryOnce);
+				window.removeEventListener('touchstart', retryOnce);
+			};
+
+			window.addEventListener('click', retryOnce, { once: true });
+			window.addEventListener('touchstart', retryOnce, { once: true });
+		});
+</script>
