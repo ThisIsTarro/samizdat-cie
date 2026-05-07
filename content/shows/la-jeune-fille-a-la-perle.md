@@ -53,7 +53,7 @@ gallery_images = [
 state = ""
 city = "Montreuil"
 venue = "Akteon Théâtre"
-dates = "Ouverture de la billeterie en Septembre 2027"
+dates = "Ouverture de la billeterie en Septembre 2026"
 url = ""
 
 [[creative_team]]
