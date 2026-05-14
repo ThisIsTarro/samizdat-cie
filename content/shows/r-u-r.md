@@ -31,7 +31,7 @@ credits_paragraph = """Auteur :  Karel Čapek
 Adaptation : Sophie Teulière
 Mise en scène : Sophie Teulière
 Avec Lambert Gintrand, Laura Hatchadourian, Julien Joulain, Antoine Ody et Léonore Vanier."""
-summary = "Sur une île isolée, l'usine R.U.R produit des robots censés libérer l'humanité du travail. Quand une révolte mondiale éclate, les employés se retrouvent assiégés dans leur propre usine."
+summary = "Sur une île isolée, l'usine R.U.R produit des robots censés libérer l'humanité du travail. Quand une révolte mondiale éclate, les employés se retrouvent assiégés dans leur propre usine. L'humanité est-elle condamnée ? Dans cette pièce d'anticipation haletante, Karel Capek pose, dès 1920, les bases d'un mythe moderne, celui de l'homme dépassé par la technologie."
 weight = 3
 
 gallery_images = [
