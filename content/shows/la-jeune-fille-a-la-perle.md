@@ -6,7 +6,7 @@ show_date = "Prochaines dates : Du 09 Janvier 2027 au 21 Mars 2027"
 show_time = ""
 duration = "45 minutes"
 audience = "Tout public à partir de 5 ans"
-notice = "Spectacle jeune public"
+notice = "Jeune public"
 ticket_label = ""
 ticket_text = ""
 ticket_url = ""
@@ -28,7 +28,7 @@ school_schedule_url = ""
 learning_brochure_text = "Dossier du spectacle"
 learning_brochure_url = "mailto:lbda.jeunefilleperle@gmail.com"
 credits_paragraph = "Autrice et mise en scène : Maud Liermann. Avec : Laura Hatchadourian, Lambert Gintrand et Maud Liermann."
-summary = "Quand Fridoline s'ennuie au musée, la perle du célèbre tableau disparaît. Elle mène alors l'enquête parmi les oeuvres d'art devenues témoins."
+summary = "La perle du célèbre tableau de Vermeer a disparu ! Une occasion rêvée pour la petite Fridoline de mener l'enquête. Revêtue de son grand imperméable de détective, elle interroge les témoins de la scène : les œuvres d'art du musée. Une plongée aussi drôle qu'instructive dans l'Histoire de l'art."
 weight = 2
 about_the_show = """
 ### La représentation des oeuvres 
@@ -76,11 +76,7 @@ publishResources = false
 +++
 ## La Pièce
 
-Quand la petite Fridoline est obligée de se rendre au musée, c'est vraiment la tuile ! Qu'est-ce qu'elle s'ennuie ! Pourtant, elle remarque un détail étrange : le tableau La jeune fille à la perle... n'a plus de perle ! Comment est-ce possible ? Qui l'a volée ?
-
-La petite fille s'improvise alors détective en herbe et se lance dans une série d'interrogatoires des seuls témoins présents sur le lieu du crime la nuit précédente : les autres oeuvres d'art du musée !
-
-Drôles, absurdes ou poétiques, 17 personnages de tableaux et de sculptures célèbres prennent vie et sèment des indices à la petite enquêtrice afin de retrouver le voleur... et la perle !
+Quand la maîtresse oblige Fridoline à se rendre au musée, c’est vraiment la tuile. Pire encore, elle doit faire des croquis ! Quel ennui ! Pourtant, elle remarque un détail étrange : “La jeune fille à la perle” de Vermeer, montre bien une jeune fille mais... pas de perle ! Comment est-ce possible ? Pour Fridoline, une seule explication possible… un vol ! Ni une, ni deux, elle s’improvise détective et interroge les autres œuvres du musée ! Drôles, absurdes ou poétiques, 18 personnages de tableaux et de sculptures célèbres prennent vie pour donner des indices à la petite enquêtrice. Espérons qu’il ne soit pas trop tard pour retrouver le voleur … et la perle !
 
 ## Intérêt pédagogique  
 Ce spectacle propose une autre vision de l’Art et offre une lecture ludique et émotionnelle de la peinture et de la sculpture. Montrer un panel d’oeuvres célèbres aux enfants dès leur plus jeune âge, sous une forme humoristique, permet de les éduquer en douceur et de leur donner envie d’aller au musée !
