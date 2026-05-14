@@ -74,8 +74,8 @@ photo = "/img/company/people/julien-joulain.jpg"
 [[company_members]]
 prenom = "Léonore"
 nom = "Vanier"
-role = "**Comédienne, Autrice**"
-texte = "Après quelques détours scientifiques, Léonore intègre le Cours Florent en 2022. En 2025 elle crée sa compagnie, Sensibles Indociles, et écrit une pièce inspirée de Genet, Copi et d’Hilda : “Le Bain”. Elle la joue à Paris et l’emmène à Avignon en 2026. En parallèle, elle co-crée sur Spotify, une fiction sonore : “La mort, c’est pas de tout repos” dans laquelle elle joue le personnage principal. Elle écrit et réalise ses premiers courts métrages (Nikon Film Festival et Prix Florent Image). Amatrice de comédie musicale, Léonore danse (modern’jazz et classique) et chante (alto) également."
+role = "**Actrice, Autrice, Metteuse en scène, Réalisatrice**"
+texte = "Léonore a créé sa compagnie de théâtre en 2025 et produit sa pièce « Le bain », création originale inspirée des Bonnes de Genet. Après un premier succès à Paris, « Le bain » est programmé à La Factory pour le festival OFF Avignon 2026. Formée au Cours Florent, elle se tourne également vers le cinéma sous le coaching de Sei Shiomi. Elle joue dans plusieurs courts-métrages, du thriller à la comédie romantique et réalise  « Le contrôle sanitaire » sélectionné au Prix Florent Image 2026. Elle prête sa voix aux best seller « La mariée de la fosse » de Mélodie Miller et à la trilogie « Quand les murs tremblent » de Victoire Sentenac. Elle intègre le collectif La Pépinière du Nouveau Monde en septembre 2026."
 instagram = "https://www.instagram.com/leonorevanier/"
 photo = "/img/company/people/leonore-vanier.jpg"
 
