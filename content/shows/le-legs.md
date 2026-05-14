@@ -6,7 +6,7 @@ show_date = "Prochaines dates : 4 et 5 Juin 2026 à 20h30"
 show_time = "Durée : 1h20"
 duration = "Durée : 1h20"
 audience = "À partir de 10 ans"
-notice = "Comédie classique de Marivaux"
+notice = "Comédie classique"
 ticket_label = "Réserver"
 ticket_text = "Réserver"
 ticket_url = "https://www.onparticipe.fr/b/U8cggMCE"
@@ -30,7 +30,7 @@ learning_brochure_url = "https://www.dropbox.com/scl/fi/28gvh405l80dbwi0f1byi/Do
 
 credits_paragraph = "Auteur : Marivaux \n Mise en scène : Sophie Teulière \n Costumes : Lucas Le Jallé \n Distribution : Lambert Gintrand, Laura Hatchadourian, Julien Joulain, Léonore Vanier, Antoine Ody, Sophie Teulière"
 
-summary = "Un héritage inattendu bouleverse le quotidien d’amoureux transis. Quand les masques tombent, l’amour résiste-t-il aux manigances et aux mensonges ? Un héritage inattendu attise les passions de six amoureux transis. Entre mensonges et manigances, chacun essaie de tirer son épingle du jeu. Soumis à un choix cornélien, préféreront-ils la richesse ou l’amour ? Dans cette pièce aux répliques acides et aux situations cocasses, Marivaux livre avec drôlerie une subtile critique sociale."
+summary = "Un héritage inattendu attise les passions de six amoureux transis. Entre mensonges et manigances, chacun essaie de tirer son épingle du jeu. Soumis à un choix cornélien, préféreront-ils la richesse ou l’amour ? Dans cette pièce aux répliques acides et aux situations cocasses, Marivaux livre avec drôlerie une subtile critique sociale."
 
 awards = [
   "Festhea - Prix du Jury",
@@ -86,7 +86,7 @@ url = "https://www.onparticipe.fr/b/U8cggMCE/participe?show=eyJpdiI6Im1XM0FzSm9n
 state = ""
 city = "Igny"
 venue = "Centre culturel Isadora Duncan"
-dates = "21 Novembre 2026"
+dates = "11 Décembre 2026"
 url = ""
 
 [[public_tickets]]
