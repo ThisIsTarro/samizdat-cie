@@ -5,6 +5,8 @@ theme = "universal"
 defaultContentLanguage = "fr"
 disableKinds = ["taxonomy", "term", "RSS"]
 cleanDestinationDir = true
+canonifyURLs = true
+relativeURLs = false
 
 [params]
     defaultDescription = "Compagnie Samizdat : créations théâtrales contemporaines et classiques, spectacles tout public et jeune public."
