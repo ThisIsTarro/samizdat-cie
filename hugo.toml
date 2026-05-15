@@ -86,14 +86,6 @@ relativeURLs = false
         footer_group = "Nos spectacles"
 
 [[menu.main]]
-    name = "Nous soutenir ❤️"
-    identifier = "menu.noussoutenir"
-    url = "/noussoutenir"
-    weight = 3
-    [menu.main.params]
-        footer_group = "Mécénat"
-
-[[menu.main]]
     name = "Contactez nous"
     identifier = "menu.contact"
     url = "/contact"
