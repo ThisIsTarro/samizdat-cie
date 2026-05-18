@@ -27,6 +27,8 @@ script_button_text = "Contactez la compagnie"
 school_schedule_url = "mailto:diffusion.laciedesbrunes@gmail.com"
 learning_brochure_text= "Dossier pédagogique"
 learning_brochure_url = "https://www.dropbox.com/scl/fi/28gvh405l80dbwi0f1byi/Dossier-Pedagogique2025.pdf?rlkey=neq418vbsxsze5y7v2u73pui3&e=1&st=ocmad9nx&dl=1"
+artistic_brochure_text = "Dossier artistique"
+artistic_brochure_url = ""
 
 credits_paragraph = "Auteur : Marivaux \n Mise en scène : Sophie Teulière \n Costumes : Lucas Le Jallé \n Distribution : Lambert Gintrand, Laura Hatchadourian, Julien Joulain, Léonore Vanier, Antoine Ody, Sophie Teulière"
 

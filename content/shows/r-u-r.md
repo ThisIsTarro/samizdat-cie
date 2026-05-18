@@ -27,6 +27,8 @@ script_button_text = "Contact compagnie"
 school_schedule_url = ""
 learning_brochure_text = "Dossier Artistique"
 learning_brochure_url = "https://www.dropbox.com/scl/fi/5907mzu8ymsv5ah5419jr/RUR-dossier-artistique_compressed.pdf?rlkey=da6tajlryc131h05orik4ynej&st=b5stmq1f&dl=1"
+artistic_brochure_text = "Dossier artistique"
+artistic_brochure_url = ""
 credits_paragraph = """Auteur :  Karel Čapek
 Adaptation : Sophie Teulière
 Mise en scène : Sophie Teulière
