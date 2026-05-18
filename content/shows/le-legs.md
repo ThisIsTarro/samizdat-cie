@@ -38,7 +38,7 @@ awards = [
   "Fous rires de Courbevoie - Prix du public"
 ]
 
-keywords = ["Le Legs", "Marivaux", "comedie classique", "theatre", "spectacle vivant", "compagnie Samizdat", "Versailles", "Mois Moliere", "piece de theatre", "amour et heritage", "critique sociale", "Sophie Teuliere"]
+keywords = ["Le Legs", "Marivaux", "comedie classique", "theatre", "spectacle vivant", "compagnie Samizdat", "Versailles", "Mois Moliere", "piece de theatre", "amour et heritage", "critique sociale", "Sophie Teuliere","classique"]
 weight = 1
 
 about_the_show = """

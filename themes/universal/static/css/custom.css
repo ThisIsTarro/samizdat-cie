@@ -346,12 +346,10 @@ body {
   line-height: 1.15;
 }
 .show-single__content p {
-text-align: justify;
 
 }
 p {
   white-space: pre-line;
-  text-align: justify;
 }
 
 [class*="aside"] p {
