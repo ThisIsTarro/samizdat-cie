@@ -37,7 +37,7 @@ summary = "Sur une île isolée, l'usine R.U.R produit des robots censés libér
 weight = 3
 
 gallery_images = [
-  "img/shows/r-u-r/show-02.jpeg",
+  "img/shows/r-u-r/show-06.jpeg",
   "img/shows/r-u-r/show-03.jpeg",
   "img/shows/r-u-r/show-04.jpeg",
   "img/shows/r-u-r/show-01.jpeg",
