@@ -29,7 +29,8 @@ learning_brochure_text = ""
 learning_brochure_url = ""
 artistic_brochure_text = ""
 artistic_brochure_url = ""
-credits_paragraph = """Autrice et mise en scène : Maud Liermann. Avec : Laura Hatchadourian, Lambert Gintrand et Maud Liermann. Credits affiche et illlustrations : [@augustin_versus_discart](https://www.instagram.com/augustin_versus_discart/)"""
+credits_paragraph = """Autrice et mise en scène : Maud Liermann. Avec : Laura Hatchadourian, Lambert Gintrand et Maud Liermann
+Credits affiche et illlustrations : [@augustin_versus_discart](https://www.instagram.com/augustin_versus_discart/)"""
 summary = "La perle du célèbre tableau de Vermeer a disparu ! Une occasion rêvée pour la petite Fridoline de mener l'enquête. Revêtue de son grand imperméable de détective, elle interroge les témoins de la scène : les œuvres d'art du musée. Une plongée aussi drôle qu'instructive dans l'Histoire de l'art."
 weight = 2
 about_the_show = """
