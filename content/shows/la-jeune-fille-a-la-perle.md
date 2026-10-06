@@ -25,11 +25,12 @@ quote_author = "Billet Réduc'"
 script_url = "mailto:lbda.jeunefilleperle@gmail.com"
 script_button_text = "Contact"
 school_schedule_url = ""
-learning_brochure_text = ""
-learning_brochure_url = ""
+learning_brochure_text = "Dossier pédagogique"
+learning_brochure_url = "https://www.dropbox.com/scl/fi/pci6egyb52pw16zzl4cbu/Dossier-P-dagogique-LJFP.zip?rlkey=tum8idwy87lhbob2m3xhu1ur8&dl=1"
 artistic_brochure_text = ""
 artistic_brochure_url = ""
-credits_paragraph = """Autrice et mise en scène : Maud Liermann. Avec : Laura Hatchadourian, Lambert Gintrand et Maud Liermann
+credits_paragraph = """
+Autrice et mise en scène : Maud Liermann. Avec : Laura Hatchadourian, Lambert Gintrand et Maud Liermann
 Credits affiche et illlustrations : [@augustin_versus_discart](https://www.instagram.com/augustin_versus_discart/)"""
 summary = "La perle du célèbre tableau de Vermeer a disparu ! Une occasion rêvée pour la petite Fridoline de mener l'enquête. Revêtue de son grand imperméable de détective, elle interroge les témoins de la scène : les œuvres d'art du musée. Une plongée aussi drôle qu'instructive dans l'Histoire de l'art."
 weight = 2
@@ -49,7 +50,7 @@ gallery_images = [
   "img/shows/la-jeune-fille-a-la-perle/DSC_1294.jpeg",
   "img/shows/la-jeune-fille-a-la-perle/DSC_1323.jpeg",
   "img/shows/la-jeune-fille-a-la-perle/DSC_1411.jpeg",
-  "img/shows/la-jeune-fille-a-la-perle/DSC_1459.jpeg",
+  "img/shows/la-jeune-fille-a-la-perle/DSC_1459.jpeg"
 ]
 
 [[public_tickets]]
@@ -70,7 +71,6 @@ name = "Lambert Gintrand"
 [[creative_team]]
 role = "Interprète"
 name = "Laura Hatchadourian"
-
 
 [build]
 render = "always"
